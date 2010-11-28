@@ -1,0 +1,35 @@
+<?php 
+// $Id$
+
+/**
+ * @file ding_wysiwyg_node_picker.install
+ * Adds support for linking to nodes in Ding! WYSIWYG editors.
+ */
+
+/**
+ * Implementation of hook_install().
+ */
+function ding_wysiwyg_node_picker_install() {
+  $profiles = wysiwyg_profile_load_all();
+  foreach ($profiles as $profile) {
+    //Enable nodepicker for all WYSIWYG profiles with the link button activated
+    if ($profile->editor == 'tinymce' && 
+        $profile->settings['buttons']['default']['link'] == 1) {
+      //Add the nodepicker button to the profile
+      if (!is_array($profile->settings['buttons']['drupal'])) {
+        $profile->settings['buttons']['drupal'] = array();
+      }
+      $profile->settings['buttons']['drupal']['nodepicker'] = 1;
+      
+      //Update the profile settings directly in the database
+      db_query("UPDATE {wysiwyg} SET settings = '%s' WHERE format = %d", 
+               serialize($profile->settings), $profile->format);
+    }
+  }
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function ding_wysiwyg_node_picker_uninstall() {
+}

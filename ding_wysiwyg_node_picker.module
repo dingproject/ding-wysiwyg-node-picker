@@ -1,0 +1,7 @@
+<?php
+// $Id$
+
+/**
+ * @file ding_wysiwyg_node_picker.module
+ * Adds support for linking to nodes in Ding! WYSIWYG editors.
+ */

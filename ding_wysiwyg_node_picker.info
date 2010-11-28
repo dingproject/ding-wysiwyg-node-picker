@@ -1,0 +1,5 @@
+core = "6.x"
+dependencies[] = "tinymce_node_picker"
+description = "Adds support for linking to nodes in Ding! WYSIWYG editors."
+name = "Ding! WYSIWYG node picker"
+package = "Ding!"
